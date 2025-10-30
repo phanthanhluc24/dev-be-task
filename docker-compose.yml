@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  users-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount the database file for persistence
+      - ./data:/app/data
+    environment:
+      - DATABASE_URL=sqlite:///./data/users.db
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Optional: Add a database viewer (SQLite browser)
+  # Uncomment if you want a web-based SQLite viewer
+  # sqlite-web:
+  #   image: coleifer/sqlite-web
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./data:/data
+  #   command: ["sqlite_web", "/data/users.db", "--host", "0.0.0.0", "--port", "8080"]
+  #   depends_on:
+  #     - users-api
+
+volumes:
+  data:
