@@ -318,9 +318,6 @@ Add email validation:
 For whichever option you choose:
 1. **Maintain existing functionality** - All current tests must still pass
 2. **Add comprehensive tests** - Cover your new endpoints and edge cases
-3. **Follow existing patterns** - Use the same code structure and style
-4. **Update documentation** - Add your new endpoints to this README
-5. **Type safety** - Use proper type hints for all new code
 
 ## 🤝 **Submission Guidelines**
 
@@ -328,6 +325,5 @@ For whichever option you choose:
 2. **Choose ONE extension option** from the list above
 3. **Implement your chosen feature** following the existing patterns
 4. **Add comprehensive tests** for your new functionality
-5. **Update this README** with documentation for your new endpoints
 6. **Ensure ALL tests pass** (existing + new)
 7. **Submit your implementation**
