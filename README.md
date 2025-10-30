@@ -4,34 +4,9 @@ A FastAPI-based REST API starter template for building a simple user management 
 
 ## 🚀 Features
 
-- **FastAPI** - Modern, fast web framework for building APIs
-- **SQLAlchemy 2.x** - Powerful ORM with modern declarative syntax
-- **SQLite** - Lightweight database (auto-creates on startup)
-- **Pydantic v2** - Data validation and serialization
-- **pytest** - Comprehensive testing framework
-- **Type hints** - Full typing support throughout the codebase
-- **Error handling** - Proper HTTP status codes and error responses
-
-## ✅ **Current Implementation Status**
-
-This repository contains a **complete working implementation** of a Users API with the following features already built:
-
-### **✅ Implemented Endpoints**
 1. **`POST /users`** - Create user with unique email validation
 2. **`GET /users`** - List users with pagination (`?limit=&offset=`)
 3. **`GET /users/{id}`** - Get individual user by ID (bonus feature)
-
-### **✅ Technical Features**
-- ✅ SQLAlchemy 2.x models with unique email constraint
-- ✅ Pydantic v2 schemas for request/response validation
-- ✅ Comprehensive error handling (400, 404, 422 status codes)
-- ✅ Full type hints throughout the codebase
-- ✅ Complete pytest test suite with 100% endpoint coverage
-- ✅ Auto-generated API documentation (Swagger UI)
-
-## 🎯 **Your Challenge: Choose ONE Extension to Implement**
-
-Since the basic requirements are complete, your task is to **extend** the API by implementing **ONE** of the following features:
 
 ## 🛠️ Tech Stack
 
@@ -277,41 +252,6 @@ Example test cases:
 - ✅ Validate request data
 - ✅ Handle edge cases
 
-## 🎯 **Evaluation Criteria**
-
-Your extension will be evaluated on:
-
-### 1. **Technical Implementation** (40%)
-- **Functionality**: New endpoints work as specified
-- **Integration**: Seamlessly extends existing codebase
-- **Error Handling**: Proper HTTP status codes and error messages
-- **Database**: Correct use of SQLAlchemy patterns
-- **Type Safety**: Comprehensive type hints
-
-### 2. **Code Quality** (30%)
-- **Consistency**: Follows existing code patterns and style
-- **Readability**: Clean, well-structured Python code
-- **Architecture**: Good separation of concerns
-- **Best Practices**: Follows FastAPI and SQLAlchemy conventions
-
-### 3. **Testing** (20%)
-- **Coverage**: Comprehensive tests for new functionality
-- **Quality**: Well-structured test cases with clear assertions
-- **Integration**: Tests work with existing test suite
-- **Edge Cases**: Handles error conditions and boundary cases
-
-### 4. **Documentation & Communication** (10%)
-- **README Updates**: Clear documentation of new endpoints
-- **Code Comments**: Appropriate inline documentation
-- **API Docs**: Proper FastAPI schema definitions
-- **Examples**: Working curl examples for new endpoints
-
-### **Bonus Points:**
-- **Innovation**: Creative approach to the chosen extension
-- **User Experience**: Thoughtful API design and error messages
-- **Performance**: Efficient database queries and pagination
-- **Security**: Proper input validation and security considerations
-
 ## 🔧 Development Tips
 
 ### Database
@@ -341,7 +281,7 @@ Your extension will be evaluated on:
 - [Pydantic Documentation](https://docs.pydantic.dev/2.0/)
 - [pytest Documentation](https://docs.pytest.org/)
 
-## 🚀 **Extension Options (Choose ONE)**
+## 🎯 **Your Challenge: Choose ONE Extension to Implement**
 
 ### **Option A: User Management Extensions**
 Add user update and deletion capabilities:
@@ -391,29 +331,3 @@ For whichever option you choose:
 5. **Update this README** with documentation for your new endpoints
 6. **Ensure ALL tests pass** (existing + new)
 7. **Submit your implementation**
-
-### **Submission Checklist**
-**Core Implementation (Already Complete):**
-- [x] `POST /users` endpoint implemented
-- [x] `GET /users` endpoint with pagination
-- [x] `GET /users/{id}` endpoint implemented
-- [x] Unique email constraint enforced
-- [x] Proper error handling and HTTP status codes
-- [x] Type hints used throughout
-- [x] Tests written and passing
-- [x] Documentation complete
-
-**Your Extension Task:**
-- [ ] **Chosen extension option**: ________________
-- [ ] New endpoints implemented with proper error handling
-- [ ] Comprehensive tests added for new functionality
-- [ ] All existing tests still pass
-- [ ] README updated with new endpoint documentation
-- [ ] Code follows existing patterns and style
-- [ ] Type hints used in all new code
-
----
-
-**Happy Coding! 🎉**
-
-Built with ❤️ using FastAPI, SQLAlchemy, and modern Python patterns.
