@@ -12,28 +12,26 @@ A FastAPI-based REST API starter template for building a simple user management 
 - **Type hints** - Full typing support throughout the codebase
 - **Error handling** - Proper HTTP status codes and error responses
 
-## 📋 Requirements to Implement
+## ✅ **Current Implementation Status**
 
-Build a REST API with the following endpoints:
+This repository contains a **complete working implementation** of a Users API with the following features already built:
 
-### 1. Create User
-- **Endpoint**: `POST /users`
-- **Request Body**: 
-  ```json
-  {
-    "name": "John Doe",
-    "email": "john@example.com"
-  }
-  ```
-- **Response**: Created user with ID and timestamp
-- **Validation**: Email must be unique (return 400 if duplicate)
+### **✅ Implemented Endpoints**
+1. **`POST /users`** - Create user with unique email validation
+2. **`GET /users`** - List users with pagination (`?limit=&offset=`)
+3. **`GET /users/{id}`** - Get individual user by ID (bonus feature)
 
-### 2. List Users
-- **Endpoint**: `GET /users`
-- **Query Parameters**: 
-  - `limit` (optional, default: 10) - Number of users to return
-  - `offset` (optional, default: 0) - Number of users to skip
-- **Response**: List of users with pagination info
+### **✅ Technical Features**
+- ✅ SQLAlchemy 2.x models with unique email constraint
+- ✅ Pydantic v2 schemas for request/response validation
+- ✅ Comprehensive error handling (400, 404, 422 status codes)
+- ✅ Full type hints throughout the codebase
+- ✅ Complete pytest test suite with 100% endpoint coverage
+- ✅ Auto-generated API documentation (Swagger UI)
+
+## 🎯 **Your Challenge: Choose ONE Extension to Implement**
+
+Since the basic requirements are complete, your task is to **extend** the API by implementing **ONE** of the following features:
 
 ## 🛠️ Tech Stack
 
@@ -144,6 +142,43 @@ The API will be available at:
 - **Interactive Docs**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 
+## 🧪 **Testing the Current Implementation**
+
+Before choosing your extension, verify the existing API works:
+
+### **Test the Endpoints**
+```bash
+# 1. Create a user
+curl -X POST "http://localhost:8000/users" \
+     -H "Content-Type: application/json" \
+     -d '{"name": "John Doe", "email": "john@example.com"}'
+
+# 2. Create another user
+curl -X POST "http://localhost:8000/users" \
+     -H "Content-Type: application/json" \
+     -d '{"name": "Jane Smith", "email": "jane@example.com"}'
+
+# 3. List users with pagination
+curl "http://localhost:8000/users?limit=5&offset=0"
+
+# 4. Get specific user
+curl "http://localhost:8000/users/1"
+
+# 5. Test duplicate email (should return 400)
+curl -X POST "http://localhost:8000/users" \
+     -H "Content-Type: application/json" \
+     -d '{"name": "John Different", "email": "john@example.com"}'
+```
+
+### **Run the Test Suite**
+```bash
+# All tests should pass
+poetry run pytest -v
+
+# Check test coverage
+poetry run pytest --cov=app
+```
+
 ## 🔧 Available Commands
 
 ### Using Make (Recommended)
@@ -242,32 +277,40 @@ Example test cases:
 - ✅ Validate request data
 - ✅ Handle edge cases
 
-## 🎯 Evaluation Criteria
+## 🎯 **Evaluation Criteria**
 
-Your implementation will be evaluated on:
+Your extension will be evaluated on:
 
-### 1. **Code Quality** (30%)
-- Clean, readable Python code
-- Proper use of type hints
-- Following Python conventions (PEP 8)
-- Good separation of concerns
+### 1. **Technical Implementation** (40%)
+- **Functionality**: New endpoints work as specified
+- **Integration**: Seamlessly extends existing codebase
+- **Error Handling**: Proper HTTP status codes and error messages
+- **Database**: Correct use of SQLAlchemy patterns
+- **Type Safety**: Comprehensive type hints
 
-### 2. **Functionality** (40%)
-- All endpoints work as specified
-- Proper error handling and HTTP status codes
-- Database constraints enforced
-- Pagination implemented correctly
+### 2. **Code Quality** (30%)
+- **Consistency**: Follows existing code patterns and style
+- **Readability**: Clean, well-structured Python code
+- **Architecture**: Good separation of concerns
+- **Best Practices**: Follows FastAPI and SQLAlchemy conventions
 
 ### 3. **Testing** (20%)
-- Comprehensive test coverage
-- Good test structure and organization
-- Integration tests with database
-- Edge case handling
+- **Coverage**: Comprehensive tests for new functionality
+- **Quality**: Well-structured test cases with clear assertions
+- **Integration**: Tests work with existing test suite
+- **Edge Cases**: Handles error conditions and boundary cases
 
-### 4. **Documentation** (10%)
-- Clear README updates
-- Code comments where necessary
-- API documentation completeness
+### 4. **Documentation & Communication** (10%)
+- **README Updates**: Clear documentation of new endpoints
+- **Code Comments**: Appropriate inline documentation
+- **API Docs**: Proper FastAPI schema definitions
+- **Examples**: Working curl examples for new endpoints
+
+### **Bonus Points:**
+- **Innovation**: Creative approach to the chosen extension
+- **User Experience**: Thoughtful API design and error messages
+- **Performance**: Efficient database queries and pagination
+- **Security**: Proper input validation and security considerations
 
 ## 🔧 Development Tips
 
@@ -298,23 +341,84 @@ Your implementation will be evaluated on:
 - [Pydantic Documentation](https://docs.pydantic.dev/2.0/)
 - [pytest Documentation](https://docs.pytest.org/)
 
-## 🤝 Submission Guidelines
+## 🚀 **Extension Options (Choose ONE)**
+
+### **Option A: User Management Extensions**
+Add user update and deletion capabilities:
+- **`PUT /users/{id}`** - Update user name/email with validation
+- **`DELETE /users/{id}`** - Soft delete user (add `deleted_at` field)
+- Handle edge cases (user not found, email conflicts)
+- Add corresponding tests
+
+### **Option B: Advanced Search & Filtering**
+Enhance user discovery:
+- **`GET /users?search={query}`** - Search users by name or email
+- **`GET /users?sort={field}&order={asc|desc}`** - Sort by name, email, or created_at
+- Support combining search with pagination
+- Add full-text search capabilities
+
+### **Option C: User Authentication System**
+Add security layer:
+- **`POST /auth/register`** - User registration with password
+- **`POST /auth/login`** - Login with JWT token generation
+- **`GET /auth/me`** - Get current user profile (protected)
+- Implement JWT middleware for protected endpoints
+- Add password hashing (bcrypt)
+
+### **Option D: Email Verification Workflow**
+Add email validation:
+- **`POST /users/{id}/send-verification`** - Send verification email
+- **`POST /users/verify`** - Verify email with token
+- Add `email_verified` field to User model
+- Mock email service for testing
+- Add verification status to user responses
+
+### **Option E: User Activity & Analytics**
+Add usage tracking:
+- **`GET /users/{id}/activity`** - Get user activity log
+- **`GET /analytics/users`** - User registration analytics
+- Track user creation, updates, login events
+- Add activity logging middleware
+- Generate basic statistics (daily/weekly signups)
+
+## 🎯 **Implementation Requirements**
+
+For whichever option you choose:
+1. **Maintain existing functionality** - All current tests must still pass
+2. **Add comprehensive tests** - Cover your new endpoints and edge cases
+3. **Follow existing patterns** - Use the same code structure and style
+4. **Update documentation** - Add your new endpoints to this README
+5. **Type safety** - Use proper type hints for all new code
+
+## 🤝 **Submission Guidelines**
 
 1. **Fork this repository**
-2. **Implement all required features**
-3. **Add comprehensive tests**
-4. **Update this README** with any additional setup instructions
-5. **Ensure all tests pass**
-6. **Submit your implementation**
+2. **Choose ONE extension option** from the list above
+3. **Implement your chosen feature** following the existing patterns
+4. **Add comprehensive tests** for your new functionality
+5. **Update this README** with documentation for your new endpoints
+6. **Ensure ALL tests pass** (existing + new)
+7. **Submit your implementation**
 
-### Submission Checklist
-- [ ] `POST /users` endpoint implemented
-- [ ] `GET /users` endpoint with pagination
-- [ ] Unique email constraint enforced
-- [ ] Proper error handling and HTTP status codes
-- [ ] Type hints used throughout
-- [ ] Tests written and passing
-- [ ] Documentation updated
+### **Submission Checklist**
+**Core Implementation (Already Complete):**
+- [x] `POST /users` endpoint implemented
+- [x] `GET /users` endpoint with pagination
+- [x] `GET /users/{id}` endpoint implemented
+- [x] Unique email constraint enforced
+- [x] Proper error handling and HTTP status codes
+- [x] Type hints used throughout
+- [x] Tests written and passing
+- [x] Documentation complete
+
+**Your Extension Task:**
+- [ ] **Chosen extension option**: ________________
+- [ ] New endpoints implemented with proper error handling
+- [ ] Comprehensive tests added for new functionality
+- [ ] All existing tests still pass
+- [ ] README updated with new endpoint documentation
+- [ ] Code follows existing patterns and style
+- [ ] Type hints used in all new code
 
 ---
 
