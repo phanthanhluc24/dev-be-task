@@ -373,14 +373,6 @@ Add email validation:
 - Mock email service for testing
 - Add verification status to user responses
 
-### **Option E: User Activity & Analytics**
-Add usage tracking:
-- **`GET /users/{id}/activity`** - Get user activity log
-- **`GET /analytics/users`** - User registration analytics
-- Track user creation, updates, login events
-- Add activity logging middleware
-- Generate basic statistics (daily/weekly signups)
-
 ## 🎯 **Implementation Requirements**
 
 For whichever option you choose:
