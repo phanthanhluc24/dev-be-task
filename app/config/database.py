@@ -21,13 +21,14 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 class Base(DeclarativeBase):
     """Base class for all database models."""
+
     pass
 
 
 def get_db():
     """
     Dependency function to get database session.
-    
+
     Yields:
         Database session that will be automatically closed after use.
     """
@@ -41,7 +42,7 @@ def get_db():
 def create_tables() -> None:
     """
     Create all database tables.
-    
+
     This should be called on application startup to ensure
     all tables exist before handling requests.
     """
